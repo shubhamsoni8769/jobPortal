@@ -8,8 +8,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/register', register)
 
 app.get('/', function (req, res) {
-    res.send('hello world')
-  })
+  res.send('hello world');
+  console.log("hi");
+})
   
   app.listen(3000);
   module.exports = app
