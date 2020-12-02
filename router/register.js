@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router();
 const mongoose = require('mongoose');
-const mongoUrl = require('../config/key').mongoUrl
+// const mongoUrl = require('../config/key').mongoUrl
+const mongoUrl = 'mongodb+srv://shubham8769:12345@cluster0.7wzyw.mongodb.net/<dbname>?retryWrites=true&w=majority'
 const User = require('../models/connection')
 
 
