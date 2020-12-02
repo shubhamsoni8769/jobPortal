@@ -5,20 +5,28 @@ const mongoUrl = require('../config/key').mongoUrl
 const User = require('../models/connection')
 
 
-console.log("hi");
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true} )
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 
-router.post('/',(req, res, next)=>{
-    console.log('register', req.body);
+router.post('/', (req, res, next) => {
     const user = new User({
-        name:req.body.name,
-        phoneNo: req.body.phoneNo
+        name: req.body.name,
+        phoneNo: req.body.phoneNo,
+        email: req.body.email,
+        location: req.body.location,
+        isFresher: req.body.isFresher,
+        availability: req.body.availability,
     });
-    console.log(user);
-    user.save().then(data =>{
-        console.log("data Save",data);
-    })
 
-    
+    //check for email
+    User.find({ email: user.email }).then((data) => {
+        console.log("hi", data);
+        if (data.length == 0) {
+            user.save().then(data => {
+                console.log("data Save", data);
+            })
+        }else{
+            res.send("email already exist")
+        }
+    })
 })
 module.exports = router
